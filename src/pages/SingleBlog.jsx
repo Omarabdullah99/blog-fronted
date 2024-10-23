@@ -6,12 +6,13 @@ import { getBlogbyIdSlice } from "../reudx/features/BlogSlice";
 import moment from "moment";
 import { SlCalender } from "react-icons/sl";
 import RelatedBlog from "../component/RelatedBlog";
+import { MDBSpinner } from "mdb-react-ui-kit";
 
 const SingleBlog = () => {
   const { id } = useParams();
   // console.log("detailsid", id);
   const dispatch = useDispatch();
-  const { allblog, blog } = useSelector((state) => state.blog );
+  const { allblog, blog, loading } = useSelector((state) => state.blog);
   useEffect(() => {
     dispatch(getBlogbyIdSlice(id));
   }, [id]);
@@ -25,30 +26,41 @@ const SingleBlog = () => {
 
   return (
     <div className="w-2/4 mx-auto py-5">
-      <div>
-        <img src={blog?.imageFile} alt="" className="w-full" />
-        <div className="cardbody">
-          <h3>{blog?.title}</h3>
-          <p className="text-[#F48FB1] font-bold">Created By: {blog?.name}</p>
-          <p className=" font-bold">Category: {blog?.category}</p>
-          <span className="text-start">
-            {blog?.tags?.map((tag) => (
-              <Link key={tag} to={`/blog/tag/${tag}`}>
-                {" "}
-                #{tag}
-              </Link>
-            ))}
-          </span>
-          <p className="flex items-center gap-1">
-            {" "}
-            <SlCalender /> {moment(blog?.createdAt).fromNow()}{" "}
-          </p>
-          <p> {blog?.description} </p>
+      {loading ? ( // Show loading state
+        <div className="d-flex justify-content-center">
+          <MDBSpinner role="status">
+            <span className="visually-hidden">Loading...</span>
+          </MDBSpinner>
         </div>
-      </div>
-      <div>
-      <RelatedBlog relatedblogs={relatedblogs}/>
-      </div>
+      ) : (
+        <div>
+          <div>
+            <img src={blog?.imageFile} alt="" className="w-full" />
+            <div className="cardbody">
+              <h3>{blog?.title}</h3>
+              <p className="text-[#F48FB1] font-bold">
+                Created By: {blog?.name}
+              </p>
+              <p className="font-bold">Category: {blog?.category}</p>
+              <span className="text-start">
+                {blog?.tags?.map((tag) => (
+                  <Link key={tag} to={`/blog/tag/${tag}`}>
+                    {" "}
+                    #{tag}
+                  </Link>
+                ))}
+              </span>
+              <p className="flex items-center gap-1">
+                <SlCalender /> {moment(blog?.createdAt).fromNow()}
+              </p>
+              <p>{blog?.description}</p>
+            </div>
+          </div>
+          <div>
+            <RelatedBlog relatedblogs={relatedblogs} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

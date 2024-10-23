@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import BlogCardCopy from "./BlogCardCopy";
 import ReactPaginate from "react-paginate";
 import Pagination from "./Pagination";
+import { MDBSpinner } from "mdb-react-ui-kit";
 
 const BlogePage = () => {
   const [search, setSearch] = useState("");
@@ -21,7 +22,7 @@ const BlogePage = () => {
   const navigate = useNavigate();
 
   // const { allblog,loading } = useSelector((state) => ({ ...state.blog }));
-  const { allblog, loading } = useSelector((state) => state.blog)
+  const { allblog, loading } = useSelector((state) => state.blog);
   // console.log('blogcurrent',currentPage)
 
   useEffect(() => {
@@ -62,10 +63,9 @@ const BlogePage = () => {
   };
   return (
     <div>
-     
       <div className="w-3/5 my-4">
         <form className=" input-group" onSubmit={handleSubmit}>
-          <div className="relative" style={{width:'-webkit-fill-available'}}>
+          <div className="relative" style={{ width: "-webkit-fill-available" }}>
             <input
               type="text"
               className="form-control p-2"
@@ -73,22 +73,36 @@ const BlogePage = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <div className="absolute top-1/2 right-2 transform -translate-y-1/2" style={{ fontSize:'25px'}}>
+            <div
+              className="absolute top-1/2 right-2 transform -translate-y-1/2"
+              style={{ fontSize: "25px" }}
+            >
               <IoIosSearch />
             </div>
           </div>
         </form>
       </div>
 
-      <div className="flex flex-col-reverse lg:flex-row gap-10 ">
+      <div className="flex flex-col-reverse lg:flex-row gap-10">
         <div className="left w-full lg:w-[70%]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {currentItems.length > 0 &&
-              currentItems?.map((item) => (
-                <BlogCardCopy key={item._id} {...item} />
-              ))}
-          </div>
-          <Pagination handlePageClick={handlePageClick} pageCount={pageCount} />
+          {loading ? ( // লোডিং স্টেট চেক করা
+            <MDBSpinner grow>
+              <span className="visually-hidden">Loading...</span>
+            </MDBSpinner>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {currentItems.length > 0 &&
+                  currentItems.map((item) => (
+                    <BlogCardCopy key={item._id} {...item} />
+                  ))}
+              </div>
+              <Pagination
+                handlePageClick={handlePageClick}
+                pageCount={pageCount}
+              />
+            </>
+          )}
         </div>
         <div className="right w-full lg:w-[30%]">
           <Sidebar />
