@@ -7,9 +7,9 @@ import { getAllUserSlice } from '../reudx/features/AuthSlice'
 
 const UserBlog = () => {
     const {userId}=useParams()
-    console.log("userIduserblog",userId)
-    const {userblog,loading}= useSelector((state)=>({...state.blog}))
-    const {allusers}= useSelector((state)=>({...state.authentication}))
+    // console.log("userIduserblog",userId)
+    const {userblog,loading}= useSelector((state)=> state.blog)
+    const {allusers}= useSelector((state)=> state.authentication)
     const dispatch=useDispatch()
     useEffect(()=>{
         dispatch(getBlogsByUserIdSlice(userId))
@@ -18,9 +18,9 @@ const UserBlog = () => {
     useEffect(()=>{
       dispatch(getAllUserSlice())
   },[])
-console.log("usrBlog-alluser",allusers)
+// console.log("usrBlog-alluser",allusers)
   const userBlogthisuser= allusers.filter((user)=> user._id === userId)
-  console.log("thisbloguser",userBlogthisuser)
+  // console.log("thisbloguser",userBlogthisuser)
 
     const excerpt = (str) => {
         if (str.length > 40) {

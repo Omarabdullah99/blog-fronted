@@ -31,10 +31,10 @@ const initialState = {
 const AddEditTour = () => {
   const [tourData, setTourData] = useState(initialState);
   const { title, description,imageFile, tags,category } = tourData;
-  const { user } = useSelector((state) => ({ ...state.authentication }));
-  const { loading,error,userblog } = useSelector((state) => ({ ...state.blog})); 
+  const { user } = useSelector((state) => state.authentication);
+  const { loading,error,userblog } = useSelector((state) => state.blog); 
   const{id}=useParams()
-  console.log("editblog",id)
+  // console.log("editblog",id)
   const userId=user?.result?._id
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -46,13 +46,13 @@ const AddEditTour = () => {
 useEffect(()=>{
   if(id){
     const singleTour = userblog.find((tour) => tour._id === id);
-    console.log("singleTour",singleTour);
+    // console.log("singleTour",singleTour);
     setTourData({ ...singleTour })
   }
 
 },[id])
 
-console.log("editalluser",userblog)
+// console.log("editalluser",userblog)
   useEffect(() => {
     //!error handle
     error && toast.error(error);
@@ -98,7 +98,7 @@ console.log("editalluser",userblog)
     const updateBlogData= {...tourData, name:user?.result?.name}
         if(!id){
         dispatch(createBlogSlice({updateBlogData, navigate, toast}))
-        console.log("addTour",updateBlogData)
+        // console.log("addTour",updateBlogData)
 
       }else{
         const object={

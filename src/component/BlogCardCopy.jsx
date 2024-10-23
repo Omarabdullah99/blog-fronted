@@ -31,9 +31,9 @@ const BlogCardCopy = ({
     return str;
   };
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => ({ ...state.authentication }));
+  const { user } = useSelector((state) => state.authentication );
   const userId = user?.result?._id;
-  console.log("cardcopy", userId);
+  // console.log("cardcopy", userId);
 
   const Likes = () => {
     if (likes?.length > 0) {

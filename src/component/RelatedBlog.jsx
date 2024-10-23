@@ -5,7 +5,7 @@ import { FaUser } from "react-icons/fa";
 
 const RelatedBlog = ({ relatedblogs }) => {
   const realted = relatedblogs;
-  console.log("related", realted);
+  // console.log("related", realted);
 
   const excerpt = (str) => {
     if (str?.length > 45) {

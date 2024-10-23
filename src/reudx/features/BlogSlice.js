@@ -6,7 +6,7 @@ export const createBlogSlice = createAsyncThunk(
   async ({ updateBlogData, navigate, toast }, { rejectWithValue }) => {
     try {
       const response = await api.createBlog(updateBlogData);
-      console.log("createblog", response);
+      // console.log("createblog", response);
       toast.success("Blog Added Successfully");
       navigate("/");
       return response.data;
@@ -21,7 +21,7 @@ export const getAllBlogsSlice = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.getAllBlogs();
-      console.log("allblog", response.data);
+      // console.log("allblog", response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -34,7 +34,7 @@ export const getLatestBlogsSlice = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.getLatestBlogs();
-      console.log("allblog", response.data);
+      // console.log("allblog", response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -94,7 +94,7 @@ export const updateBlogSlice = createAsyncThunk(
   "blog/updateBlogSlice",
   async (object, { rejectWithValue }) => {
     const { updateBlogData, id, toast, navigate } = object;
-    console.log(object);
+    // console.log(object);
     try {
       const response = await api.updateBlog(updateBlogData, id);
       toast.success("Tour Updated Successfully");
@@ -112,7 +112,7 @@ export const deleteBlogSlice = createAsyncThunk(
     try {
       const response = await api.deleteBlog(id);
       toast.success("Blog Deleted Successfully");
-      console.log("blogdeleteresponse", response.data);
+      // console.log("blogdeleteresponse", response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -125,7 +125,7 @@ export const likeBlogSlice = createAsyncThunk(
   async ({ _id }, { rejectWithValue }) => {
     try {
       const response = await api.likeBlog(_id);
-      console.log("likeresponse", response.data);
+      // console.log("likeresponse", response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -153,7 +153,7 @@ const blogSlice = createSlice({
     [createBlogSlice.fulfilled]: (state, action) => {
       state.loading = false;
       state.allblog = [action.payload];
-      console.log("createBlog", action);
+      // console.log("createBlog", action);
     },
     [createBlogSlice.rejected]: (state, action) => {
       state.loading = false;
@@ -176,7 +176,7 @@ const blogSlice = createSlice({
     [getLatestBlogsSlice.fulfilled]: (state, action) => {
       state.loading = false;
       state.latestblog = action.payload;
-      console.log("getLatestBlog", action.payload);
+      // console.log("getLatestBlog", action.payload);
     },
     [getLatestBlogsSlice.rejected]: (state, action) => {
       state.loading = false;
@@ -188,7 +188,7 @@ const blogSlice = createSlice({
     [getBlogbyIdSlice.fulfilled]: (state, action) => {
       state.loading = false;
       state.blog = action.payload;
-      console.log("getBlogById", action.payload);
+      // console.log("getBlogById", action.payload);
     },
     [getBlogbyIdSlice.rejected]: (state, action) => {
       state.loading = false;
@@ -200,7 +200,7 @@ const blogSlice = createSlice({
     [searchBlogsSlice.fulfilled]: (state, action) => {
       state.loading = false;
       state.searchBlog = action.payload;
-      console.log("serachBlogaction", action.payload);
+      // console.log("serachBlogaction", action.payload);
     },
     [searchBlogsSlice.rejected]: (state, action) => {
       state.loading = false;
@@ -212,7 +212,7 @@ const blogSlice = createSlice({
     [getBlogsByTagSlice.fulfilled]: (state, action) => {
       state.loading = false;
       state.tagsBlog = action.payload;
-      console.log("serachBlogaction", action.payload);
+      // console.log("serachBlogaction", action.payload);
     },
     [getBlogsByTagSlice.rejected]: (state, action) => {
       state.loading = false;
@@ -224,7 +224,7 @@ const blogSlice = createSlice({
     [getBlogsByUserIdSlice.fulfilled]: (state, action) => {
       state.loading = false;
       state.userblog = [...action.payload];
-      console.log("getBlogsByUserId", action.payload);
+      // console.log("getBlogsByUserId", action.payload);
     },
     [getBlogsByUserIdSlice.rejected]: (state, action) => {
       state.loading = false;
@@ -256,7 +256,7 @@ const blogSlice = createSlice({
       const {
         arg: { id },
       } = action.meta;
-      console.log("deleteBlogaction", action.meta);
+      // console.log("deleteBlogaction", action.meta);
       if (id) {
         state.userblog = state.userblog.filter((item) => item._id !== id);
       }
@@ -271,8 +271,8 @@ const blogSlice = createSlice({
       const {
         arg: { _id },
       } = action.meta;
-      console.log("likemeta", action.meat);
-      console.log("likepaylod", action.payload);
+      // console.log("likemeta", action.meat);
+      // console.log("likepaylod", action.payload);
       if (_id) {
         state.allblog = state?.allblog?.map((item) =>
           item._id === _id ? action.payload : item

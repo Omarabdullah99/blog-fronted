@@ -7,16 +7,16 @@ import { getLatestBlogsSlice } from '../reudx/features/BlogSlice'
 
 const Sidebar = () => {
     const [popularBlog,setPopularBlog]=useState([])
-    const {latestblog}= useSelector((state)=>({...state.blog}))
+    const {latestblog}= useSelector((state)=> state.blog)
     const dispatch=useDispatch()
 
     useEffect(()=>{
         dispatch(getLatestBlogsSlice())
 
     },[])
-    console.log('slider-latestblog',latestblog)
+    // console.log('slider-latestblog',latestblog)
 
-    console.log("popularblog",popularBlog)
+    // console.log("popularblog",popularBlog)
     const excerpt = (str) => {
         if (str?.length > 45) {
           str = str.substring(0, 45) + " ...";
@@ -32,7 +32,7 @@ const Sidebar = () => {
       };
 
       const populartag=["sports","ai","health","tech","cr7" ]
-      console.log("side-popular",populartag)
+      // console.log("side-popular",populartag)
   return (
     <div>
     <h1 className="text-3xl font-bold">Popular tags</h1>

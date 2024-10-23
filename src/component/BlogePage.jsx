@@ -20,7 +20,8 @@ const BlogePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { allblog } = useSelector((state) => ({ ...state.blog }));
+  // const { allblog,loading } = useSelector((state) => ({ ...state.blog }));
+  const { allblog, loading } = useSelector((state) => state.blog)
   // console.log('blogcurrent',currentPage)
 
   useEffect(() => {
@@ -61,11 +62,7 @@ const BlogePage = () => {
   };
   return (
     <div>
-      {/*----------category section----- */}
-      {/* <div>
-      <CategorySelection onSelectCategory={handleCategoryChange} selectedCategory={selectedCategory} activeCategory={activeCategory} />
-  </div> */}
-      {/*----------search section----- */}
+     
       <div className="w-3/5 my-4">
         <form className=" input-group" onSubmit={handleSubmit}>
           <div className="relative" style={{width:'-webkit-fill-available'}}>

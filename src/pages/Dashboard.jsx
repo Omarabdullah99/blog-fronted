@@ -9,18 +9,18 @@ import { toast } from "react-toastify";
 
 
 const Dashboard = () => {
-    const {user}= useSelector((state)=>({...state.authentication}))
+    const {user}= useSelector((state)=> state.authentication)
     const userId= user?.result?._id
-    console.log("dashboarduser",userId)
+    // console.log("dashboarduser",userId)
 
     const dispatch=useDispatch()
     useEffect(()=>{
         dispatch(getBlogsByUserIdSlice(userId))
     },[userId])
 
- const {userblog,loading}= useSelector((state)=>({...state.blog}))
- console.log("userblog",userblog)
- console.log("dashboard",loading)
+ const {userblog,loading}= useSelector((state)=> state.blog)
+//  console.log("userblog",userblog)
+//  console.log("dashboard",loading)
 
  const excerpt = (str) => {
     if (str.length > 40) {

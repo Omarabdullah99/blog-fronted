@@ -9,9 +9,9 @@ import RelatedBlog from "../component/RelatedBlog";
 
 const SingleBlog = () => {
   const { id } = useParams();
-  console.log("detailsid", id);
+  // console.log("detailsid", id);
   const dispatch = useDispatch();
-  const { allblog, blog } = useSelector((state) => ({ ...state.blog }));
+  const { allblog, blog } = useSelector((state) => state.blog );
   useEffect(() => {
     dispatch(getBlogbyIdSlice(id));
   }, [id]);
@@ -21,7 +21,7 @@ const SingleBlog = () => {
   const relatedblogs = allblog?.filter(
     (blogs) => blogs.category === blog.category
   );
-  console.log("relatedblog", relatedblogs);
+  // console.log("relatedblog", relatedblogs);
 
   return (
     <div className="w-2/4 mx-auto py-5">
