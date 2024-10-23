@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const API= axios.create({baseURL:"https://blog-server-last-test.vercel.app"})
+// backend url latest working:https://blog-backend-luim.onrender.com
+//backend url previous working:https://blog-server-last-test.vercel.app
+
+const API= axios.create({baseURL:"https://blog-backend-luim.onrender.com"})
 
 //*middleware handle backend and fontend
 //token backedne patabo
